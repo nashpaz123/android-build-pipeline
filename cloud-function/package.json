@@ -1,0 +1,17 @@
+{
+  "name": "trigger-android-build",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@google-cloud/storage": "^6.12.0",
+    "@google-cloud/firestore": "^6.8.0",
+    "@google-cloud/cloudbuild": "^5.1.0",
+    "axios": "^1.7.2",
+    "unzipper": "^0.10.14",
+    "uuid": "^9.0.1",
+    "rimraf": "^5.0.5"
+  },
+  "engines": {
+    "node": "20"
+  }
+}
