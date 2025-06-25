@@ -7,7 +7,10 @@ const { v4: uuidv4 } = require('uuid');
 exports.triggerBuild = async (event, context) => {
   const file = event;
   const storage = new Storage();
-  const firestore = new Firestore();
+  const firestore = new Firestore({
+    projectId: process.env.GCP_PROJECT,
+    databaseId: 'android-build-fsdb-us',
+  });
   const buildId = context.eventId || uuidv4();
   const bucket = storage.bucket(file.bucket);
   const zipFile = bucket.file(file.name);
