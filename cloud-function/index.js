@@ -32,6 +32,7 @@ exports.triggerBuild = async (event, context) => {
         },
       },
     };
+    console.log('Build configuration:', JSON.stringify(build, null, 2));
     const [operation] = await cloudbuild.createBuild({ projectId, build });
     const [buildResult] = await operation.promise();
 
@@ -48,7 +49,7 @@ exports.triggerBuild = async (event, context) => {
 
     console.log(`Build ${buildId} completed: ${buildResult.status}`);
   } catch (error) {
-    console.error(`Build ${buildId} failed: ${error.message}`);
+    console.error(`Build ${buildId} failed: ${error.message}`, error.stack);
     const errorData = {
       buildId,
       success: false,
@@ -59,4 +60,4 @@ exports.triggerBuild = async (event, context) => {
     await firestore.collection('build_results').doc(buildId).set(errorData);
     await axios.post(process.env.WEBHOOK_URL, errorData);
   }
-};
+};;
